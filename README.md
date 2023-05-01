@@ -6,6 +6,10 @@
 * Make sure you have at least firefox or chrome installed. The script current supports just these two browsers
 * Open your cmd / terminal and go the location where you have unzipped this directory 
     * `cd <location_of_the_directory>`
+* Run (only once)
+    ```
+    pip install -r requirements.txt
+    ```
 * You will notice an `uscis_info.xlsx` file. Add your entries to this file and save the file. **Close `Microsoft Excel` before running the script**
 * Run the script as
 ```
