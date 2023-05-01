@@ -7,7 +7,7 @@ import argparse
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-b', '--browser', help="Choose your browser", required=True, choices=['firefox', 'chrome'])
-    parser.add_argument('-c', '--chunk', help="Choose chunk size, default is 5", default=5, required=False, choices=range(5, 10))
+    parser.add_argument('-c', '--chunk', help="Choose chunk size, default is 5", default=5, required=False, choices=range(5, 11), type=int)
     parser.add_argument('-f', '--file-name', help="Absolute path to the excel sheet", default='uscis_info.xlsx', required=False)
     args = vars(parser.parse_args())
     workbook_df = pd.read_excel(args['file_name'], sheet_name='Sheet1')
@@ -33,23 +33,23 @@ def main():
         for _, row in chunk.iterrows():
             driver.switch_to.window(driver.window_handles[index+1])
             driver.get('https://www.uscis.gov/report-fraud/uscis-tip-form')
-            prior_submission = row['Prior Submissions']
-            additional_info = row['Providing additional Info']
+            prior_submission = row['Prior Submissions'] if not pd.isna(row['Prior Submissions']) else 'N'
+            additional_info = row['Prior Submissions'] if not pd.isna(row['Providing additional Info']) else 'N'
             violator_info = row['Violator Info']
-            reporting_from = row['Reporting From']
-            business_name = row['Business Name']
-            first_name_of_violator = row['First Name']
-            last_name_of_violator = row['Last Name']
-            address = row['Address']
+            reporting_from = row['Reporting From'] if not pd.isna(row['Providing additional Info']) else 'INSIDE_US'
+            business_name = row['Business Name'] if not pd.isna(row['Business Name']) else ''
+            first_name_of_violator = row['First Name'] if not pd.isna(row['First Name']) else ''
+            last_name_of_violator = row['Last Name'] if not pd.isna(row['Last Name']) else ''
+            address = row['Address'] if not pd.isna(row['Address']) else ''
             address_type = row['Address Type']
-            city = row['City']
+            city = row['City'] if not pd.isna(row['City']) else ''
             state = row['State']
-            zip = row['Zip']
+            zip = row['Zip'] if not pd.isna(row['Zip']) else ''
             country = row['Country']
             dob = row['DOB']
-            a_number = row['A-Number']
-            receipt_number = row['Receipt Number']
-            summary = row['Summary']
+            a_number = row['A-Number'] if not pd.isna(row['A-Number']) else ''
+            receipt_number = row['Receipt Number'] if not pd.isna(row['Receipt Number']) else ''
+            summary = row['Summary'] if not pd.isna(row['Summary']) else ''
             # points to ->  Have you previously submitted this information to USCIS? 
             elem = driver.find_element(By.ID, f"edit-have-you-previously-submitted-this-information-to-uscis-{prior_submission.lower()}")
             driver.execute_script("arguments[0].click();", elem)
@@ -82,7 +82,7 @@ def main():
                 # business or both
                 driver.find_element(By.ID, "edit-business-name").send_keys(business_name)
                 driver.find_element(By.ID, "edit-city").send_keys(city)
-                driver.find_element(By.ID, "edit-zip-code").send_keys(zip)
+                driver.find_element(By.ID, "edit-zip-code").send_keys(str(int(zip)))
             elif violator_info != 'BUSINESS':
                 # individual or both
                 driver.find_element(By.ID, "edit-reported-first-name").send_keys(first_name_of_violator)
