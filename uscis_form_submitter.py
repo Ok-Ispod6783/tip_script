@@ -9,8 +9,9 @@ def main():
     parser.add_argument('-b', '--browser', help="Choose your browser", required=True, choices=['firefox', 'chrome'])
     parser.add_argument('-c', '--chunk', help="Choose chunk size, default is 5", default=5, required=False, choices=range(5, 11), type=int)
     parser.add_argument('-f', '--file-name', help="Absolute path to the excel sheet", default='uscis_info.xlsx', required=False)
+    parser.add_argument('-s', '--sheet-name', help="Sheet name within the file", required=True)
     args = vars(parser.parse_args())
-    workbook_df = pd.read_excel(args['file_name'], sheet_name='Sheet1')
+    workbook_df = pd.read_excel(args['file_name'], sheet_name=args['sheet_name'])
     if args['browser'] == 'firefox':
         driver = webdriver.Firefox()
     else:
