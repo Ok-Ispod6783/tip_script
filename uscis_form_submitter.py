@@ -87,11 +87,6 @@ def autofillform(driver, row, index, first_name, last_name, email, phone):
     # points to -> Summary of Suspected Fraud or Abuse
     driver.find_element(By.ID, "edit-abuse-description").send_keys(summary)
 
-    time.sleep(2)
-    # click on captcha
-    driver.switch_to.frame(driver.find_element(By.TAG_NAME, "iframe"))
-    driver.find_element(By.ID, "recaptcha-anchor").click()
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-b', '--browser', help="Choose your browser", required=True, choices=['firefox', 'chrome'])
