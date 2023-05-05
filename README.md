@@ -23,12 +23,12 @@ Some important notes before running the script
 
 Run the script with (These are just example commands, tweak them according to your usage).
 ```
-python uscis_form_submitter.py -b firefox -s Sheet1
+python uscis_form_submitter.py -b firefox -s Sheet1 -fname foo -lname bar -e foobar@bar.com -p 123456789
 ```
 Note if you are using mac you may need to use
 
 ```
-python3 uscis_form_submitter.py -b firefox -s Sheet1
+python3 uscis_form_submitter.py -b firefox -s Sheet1 -fname foo -lname bar -e foobar@bar.com -p 123456789
 ```
 
 Script takes the following arguments
@@ -37,4 +37,8 @@ Script takes the following arguments
 -s <sheet name within the excel file> <required>
 -c <specify a value between 5 or 10> (optional) -> Controls the number of tabs to be opened at a time. Default is 5
 -f <absolute path of the file> (optional) -> Make sure the excel file follows the template in this repository. Default is uscis_info.xlsx
+-fname <Your first name> (optional)
+-lname <Your last name> (optional)
+-p <phone number> (optional)
+-e <email> (optinal)
 ```
