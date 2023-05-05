@@ -20,6 +20,7 @@ Some important notes before running the script
 
 3. **There will be always be a blank tab , do not close that tab and leave it as is**
 
+4. **It comes preloaded with extensions that will help you solve the captcha**
 
 Run the script with (These are just example commands, tweak them according to your usage).
 ```
