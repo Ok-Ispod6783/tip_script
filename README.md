@@ -23,12 +23,12 @@ Some important notes before running the script
 
 Run the script with (These are just example commands, tweak them according to your usage).
 ```
-python uscis_form_submitter.py -b firefox -s Sheet1 -fname foo -lname bar -e foobar@bar.com -p 123456789
+python uscis_form_submitter.py -b firefox -s "Consolidated Sheet" -fname foo -lname bar -e foobar@bar.com -p 123456789
 ```
 Note if you are using mac you may need to use
 
 ```
-python3 uscis_form_submitter.py -b firefox -s Sheet1 -fname foo -lname bar -e foobar@bar.com -p 123456789
+python3 uscis_form_submitter.py -b firefox -s "Consolidated Sheet" -fname foo -lname bar -e foobar@bar.com -p 123456789 
 ```
 
 Script takes the following arguments
